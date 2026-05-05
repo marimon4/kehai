@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KEHAI — Glass Shrine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300;400&family=Rajdhani:wght@300;400;500&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #030305;
+      --gold: #c9a55a;
+      --gold-dim: rgba(201,165,90,0.25);
+      --gold-line: rgba(201,165,90,0.2);
+      --glass-border: rgba(255,255,255,0.05);
+      --white: #e8e4dc;
+      --white-dim: rgba(232,228,220,0.4);
+      --white-faint: rgba(232,228,220,0.15);
+      --font-display: 'Oxanium', sans-serif;
+      --font-body: 'Rajdhani', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--white); font-family: var(--font-body); font-weight: 300; line-height: 1.7; overflow-x: hidden; cursor: crosshair; }
+    body::after { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"); background-size: 256px 256px; pointer-events: none; z-index: 9999; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 24px 48px; background: linear-gradient(to bottom, rgba(3,3,5,0.92), transparent); }
+    .nav-logo { font-family: var(--font-display); font-size: 11px; font-weight: 400; letter-spacing: 0.6em; color: var(--gold); text-decoration: none; }
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.2em; color: var(--white-faint); text-decoration: none; text-transform: uppercase; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--gold); }
+    #hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; overflow: hidden; padding: 0 24px 80px; }
+    .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 42%, rgba(8,14,40,0.35), transparent 70%), var(--black); }
+    .hero-halo-img {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(900px, 100vw); height: min(900px, 100vw);
+  object-fit: contain;
+  animation: halo-breathe 7s ease-in-out infinite;
+  mix-blend-mode: screen;
+  opacity: 0.62;
+  filter: brightness(0.85) contrast(1.05);
+  -webkit-mask-image: radial-gradient(ellipse 50% 58% at 50% 50%, black 45%, transparent 82%);
+  mask-image: radial-gradient(ellipse 50% 58% at 50% 50%, black 45%, transparent 82%);
+}
+    @keyframes halo-breathe { 0%,100% { transform: translate(-50%,-50%) scale(1); opacity:0.62; filter: brightness(0.85) contrast(1.05); } 50% { transform: translate(-50%,-50%) scale(1.018); opacity:0.74; filter: brightness(1.1) contrast(1.08); } }
+    .hero-halo-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(920px, 102vw); height: min(920px, 102vw); border-radius: 50%; border: 1px solid rgba(201,165,90,0.05); animation: ring-pulse 7s ease-in-out infinite; pointer-events: none; }
+    .hero-halo-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(760px, 86vw); height: min(760px, 86vw); border-radius: 50%; background: radial-gradient(ellipse 38% 38% at 50% 50%, rgba(201,165,90,0.0) 0%, rgba(201,165,90,0.07) 55%, rgba(201,165,90,0.0) 72%); animation: glow-pulse 7s ease-in-out infinite; pointer-events: none; }
+    @keyframes glow-pulse { 0%,100% { opacity: 0.4; transform: translate(-50%,-50%) scale(1); } 50% { opacity: 1; transform: translate(-50%,-50%) scale(1.04); } }
+    @keyframes ring-pulse { 0%,100% { opacity:0.4; transform:translate(-50%,-50%) scale(1); } 50% { opacity:0.1; transform:translate(-50%,-50%) scale(1.02); } }
+    .hero-reflection {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, 6%) scaleY(-0.15) scaleX(0.8);
+  width: min(900px, 100vw); height: min(900px, 100vw);
+  object-fit: contain; mix-blend-mode: screen;
+  opacity: 0.1; filter: blur(18px) brightness(0.6);
+  -webkit-mask-image: radial-gradient(ellipse 46% 46% at 50% 50%, black 30%, transparent 68%);
+  mask-image: radial-gradient(ellipse 46% 46% at 50% 50%, black 30%, transparent 68%);
+  pointer-events: none;
+}
+    .water-lines { position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; pointer-events: none; }
+    .water-lines span { display: block; height: 1px; background: linear-gradient(to right, transparent, rgba(201,165,90,0.4), transparent); margin-bottom: 20px; animation: wdrift 5s ease-in-out infinite; opacity: 0.1; }
+    .water-lines span:nth-child(2) { animation-delay: 1.8s; opacity: 0.06; }
+    .water-lines span:nth-child(3) { animation-delay: 3.5s; opacity: 0.04; }
+    @keyframes wdrift { 0%,100% { transform:scaleX(0.4); } 50% { transform:scaleX(1); } }
+    .hero-vignette { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 55%, var(--black) 100%); pointer-events: none; }
+/* Dark center overlay — makes KEHAI text legible over moon */
+.hero-center-shadow {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(900px, 100vw); height: min(900px, 100vw);
+  border-radius: 50%;
+  background: radial-gradient(ellipse 38% 38% at 50% 50%, rgba(3,3,5,0.75) 0%, rgba(3,3,5,0.4) 40%, transparent 68%);
+  pointer-events: none;
+  z-index: 1;
+}
+    .hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; padding-top: min(56vh, 520px); }
+    .hero-title { font-family: var(--font-display); font-size: clamp(52px,15vw,120px); font-weight: 200; letter-spacing: 0.5em; text-indent: 0.5em; color: var(--white); line-height: 1; animation: rise 1.6s ease both; }
+    .hero-tagline { font-family: var(--font-body); font-size: clamp(13px,2.2vw,16px); font-weight: 300; letter-spacing: 0.22em; color: rgba(232,228,220,0.78); margin-top: 22px; line-height: 2.2; animation: rise 1.6s 0.2s ease both; }
+    .hero-single { font-family: var(--font-mono); font-size: clamp(9px,1.4vw,11px); font-style: italic; letter-spacing: 0.35em; color: var(--gold); margin-top: 24px; animation: rise 1.6s 0.4s ease both; }
+    .hero-btn {
+  display: inline-block; margin-top: 36px;
+  font-family: var(--font-display);
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 0.45em; text-indent: 0.45em;
+  text-transform: uppercase; text-decoration: none;
+  color: rgba(201,165,90,0.7);
+  background: transparent;
+  border: 1px solid rgba(201,165,90,0.25);
+  padding: 14px 40px;
+  transition: color 0.4s, border-color 0.4s, transform 0.3s;
+  animation: rise 1.6s 0.6s ease both;
+}
+    .hero-btn:hover { color: rgba(201,165,90,1); border-color: rgba(201,165,90,0.5); transform: translateY(-2px); }
+    @keyframes rise { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    .scroll-cue { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px; animation: rise 2s 1.2s ease both; }
+    .scroll-cue span { font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.4em; color: var(--white-faint); }
+    .scroll-tick { width: 1px; height: 44px; background: linear-gradient(to bottom, var(--gold-dim), transparent); animation: tick 2.5s ease-in-out infinite; }
+    @keyframes tick { 0% { transform:scaleY(0); transform-origin:top; } 49% { transform:scaleY(1); transform-origin:top; } 50% { transform-origin:bottom; } 100% { transform:scaleY(0); transform-origin:bottom; } }
+    .section { padding: 100px 48px; max-width: 1000px; margin: 0 auto; border-top: 1px solid var(--glass-border); }
+    .section-tag { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.5em; color: var(--gold); text-transform: uppercase; margin-bottom: 52px; display: flex; align-items: center; gap: 16px; }
+    .section-tag::after { content: ''; width: 48px; height: 1px; background: var(--gold-line); }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.9s ease, transform 0.9s ease; }
+    .reveal.on { opacity: 1; transform: none; }
+    .about-text { font-family: var(--font-body); font-size: clamp(17px,2.8vw,24px); font-weight: 300; line-height: 1.9; color: rgba(232,228,220,0.62); max-width: 600px; letter-spacing: 0.04em; }
+    .about-text strong { color: var(--white); font-weight: 500; }
+    .releases-list { display: flex; flex-direction: column; gap: 2px; }
+    .release { display: grid; grid-template-columns: 64px 1fr; grid-template-rows: auto auto; column-gap: 28px; row-gap: 16px; padding: 28px 32px; background: rgba(255,255,255,0.015); border: 1px solid var(--glass-border); position: relative; transition: background 0.4s; overflow: hidden; }
+    .release::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--gold); transform: scaleY(0); transform-origin: bottom; transition: transform 0.5s ease; }
+    .release:hover { background: rgba(201,165,90,0.02); }
+    .release:hover::before { transform: scaleY(1); }
+    .release-art {
+  width: 72px; height: 72px;
+  grid-row: span 2;
+  background: rgba(10,8,6,0.9);
+  border: 1px solid rgba(201,165,90,0.15);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; flex-shrink: 0; align-self: center;
+  position: relative;
+}
+.release-art img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(0.65) contrast(1.05);
+  transition: filter 0.5s ease;
+}
+.release:hover .release-art img { filter: brightness(0.78) contrast(1.05); }
+    .release-art-ph { font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.15em; color: var(--gold-line); }
+    .release-meta { align-self: end; }
+    .release-num { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.4em; color: var(--gold); margin-bottom: 5px; }
+    .release-title { font-family: var(--font-display); font-size: clamp(15px,2.5vw,20px); font-weight: 300; letter-spacing: 0.2em; color: var(--white); }
+    .release-type { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.3em; color: var(--white-faint); margin-top: 4px; }
+    .release-platforms { display: flex; flex-wrap: wrap; gap: 8px; align-self: start; }
+    .plat { font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.25em; text-transform: uppercase; text-decoration: none; color: var(--white-faint); padding: 6px 14px; border: 1px solid var(--glass-border); transition: color 0.3s, border-color 0.3s; }
+    .plat:hover { color: var(--gold); border-color: var(--gold-line); }
+    .fragments { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1.6fr 1fr; gap: 2px; height: min(560px,80vw); }
+    .fragment { background: rgba(255,255,255,0.015); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; transition: border-color 0.4s; cursor: pointer; }
+    .fragment:first-child { grid-row: span 2; }
+    .fragment:hover { border-color: var(--gold-line); }
+    .fragment img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s ease, filter 1.2s ease; filter: brightness(0.75); }
+    .fragment:hover img { transform: scale(1.03); filter: brightness(0.92); }
+    .fragment-label { font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.3em; color: var(--white-faint); text-transform: uppercase; text-align: center; }
+    .fragment-play { position: absolute; bottom: 12px; right: 12px; width: 24px; height: 24px; border: 1px solid var(--gold-line); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+    .fragment:hover .fragment-play { opacity: 1; }
+    .fragment-play::after { content: ''; width: 0; height: 0; border: 4px solid transparent; border-left: 7px solid var(--gold); margin-left: 2px; }
+    #contact { text-align: center; }
+    .contact-body { font-family: var(--font-body); font-size: clamp(14px,2.2vw,18px); font-weight: 300; letter-spacing: 0.08em; color: var(--white-dim); line-height: 1.9; margin-bottom: 44px; }
+    .contact-link { font-family: var(--font-display); font-size: 12px; font-weight: 300; letter-spacing: 0.4em; color: var(--gold); text-decoration: none; text-transform: uppercase; border-bottom: 1px solid var(--gold-line); padding-bottom: 4px; transition: opacity 0.3s; }
+    .contact-link:hover { opacity: 0.6; }
+    footer { padding: 56px 48px; border-top: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: space-between; }
+    .footer-logo { font-family: var(--font-display); font-size: 10px; font-weight: 300; letter-spacing: 0.6em; color: var(--gold); }
+    .footer-copy { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.2em; color: var(--white-faint); }
+    @media (max-width: 640px) {
+      nav { padding: 20px; } .nav-links { display: none; } .section { padding: 72px 20px; }
+      .release { grid-template-columns: 48px 1fr; padding: 20px; }
+      .fragments { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3,1fr); height: auto; }
+      .fragment:first-child { grid-column: span 2; grid-row: span 1; min-height: 160px; }
+      footer { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="#hero">KEHAI</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#releases">Releases</a></li>
+      <li><a href="#visuals">Visuals</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <img class="hero-halo-img" src="02_HALO/halo_01_closeup_clean.png">
+    <div class="hero-halo-ring"></div>
+    <img class="hero-reflection" src="02_HALO/halo_01_closeup_clean.png">
+    <div class="water-lines"><span></span><span></span><span></span></div>
+    <div class="hero-vignette"></div>
+    <div class="hero-center-shadow"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">KEHAI</h1>
+      <p class="hero-tagline">You can't see me,<br>but you feel me.</p>
+      <p class="hero-single">Glass Shrine</p>
+      <a href="#releases" class="hero-btn">May 11, 2026</a>
+    </div>
+
+  </section>
+  <div class="section reveal" id="about">
+    <p class="section-tag">About</p>
+    <p class="about-text">Ritual futurism.<br>Sound. Light. Presence.<br><br>A masked oracle from Japan.</p>
+  </div>
+  <div class="section reveal" id="releases">
+    <p class="section-tag">Releases</p>
+    <div class="releases-list">
+      <article class="release">
+        <div class="release-art">
+          <!-- REPLACE src with actual path when deploying -->
+          <img src="08_JACKET/COVER FIX.png" alt="Glass Shrine cover" />
+        </div>
+        <div class="release-meta">
+          <p class="release-num">01</p>
+          <h2 class="release-title">KEHAI — Glass Shrine</h2>
+          <p class="release-type">Single · May 11, 2026</p>
+        </div>
+        <div class="release-platforms">
+          <!-- Simplified until official distribution -->
+          <a href="#" class="plat">Listen</a>
+          <a href="#" class="plat">Watch</a>
+          <a href="#" class="plat">Use Sound</a>
+          <!-- POST-RELEASE: replace above with:
+          <a href="https://open.spotify.com/..." class="plat">Spotify</a>
+          <a href="https://music.apple.com/..." class="plat">Apple</a>
+          <a href="https://youtube.com/..." class="plat">YouTube</a>
+          <a href="https://tiktok.com/..." class="plat">TikTok</a>
+          <a href="https://instagram.com/..." class="plat">Instagram</a>
+          -->
+        </div>
+      </article>
+      <article class="release">
+        <div class="release-art">
+          <!-- REPLACE src with actual path when deploying -->
+          <img src="01_CHARACTER/oracle/oracle_icon_v2_dark.jpg" alt="YORU YORU cover" />
+        </div>
+        <div class="release-meta">
+          <p class="release-num">02</p>
+          <h2 class="release-title">Coming</h2>
+          <p class="release-type">Coming Soon</p>
+        </div>
+        <div class="release-platforms">
+          <!-- Simplified until official distribution -->
+          <a href="#" class="plat">Listen</a>
+          <a href="#" class="plat">Watch</a>
+          <a href="#" class="plat">Use Sound</a>
+          <!-- POST-RELEASE: replace above with:
+          <a href="https://open.spotify.com/..." class="plat">Spotify</a>
+          <a href="https://music.apple.com/..." class="plat">Apple</a>
+          <a href="https://youtube.com/..." class="plat">YouTube</a>
+          <a href="https://tiktok.com/..." class="plat">TikTok</a>
+          <a href="https://instagram.com/..." class="plat">Instagram</a>
+          -->
+        </div>
+      </article>
+    </div>
+  </div>
+  <div class="section reveal" id="visuals">
+    <p class="section-tag">Visual Fragments</p>
+    <div class="fragments">
+
+      <div class="fragment" data-label="Teaser Video">
+        <img src="04_STAGE/stage_01_main_9x16.png" alt="Glass Shrine" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.75)">
+        <div class="fragment-play"></div>
+      </div>
+
+      <div class="fragment" data-label="Mask Still">
+        <img src="01_CHARACTER/oracle/oracle_08_front_dark_true_9x16_v1.png" alt="Mask Still" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.75)">
+      </div>
+
+
+      <div class="fragment" data-label="Behind the Shrine">
+        <img src="05_VIDEO/tapNow/KF05_oracle_back_halo_wide_16x9_v2.png" alt="Behind the Shrine" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.75)">
+      </div>
+
+    </div>
+  </div>
+  <div class="section reveal" id="contact">
+    <p class="section-tag" style="justify-content:center">Contact</p>
+    <p class="contact-body">If you feel it,<br>you already know where to reach.</p>
+    <a href="mailto:hello@kehai.world" class="contact-link">hello@kehai.world</a>
+  </div>
+  <footer>
+    <span class="footer-logo">KEHAI</span>
+    <span class="footer-copy">© 2025 KEHAI · Japan</span>
+  </footer>
+  <script>
+    const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }), { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
