@@ -134,16 +134,18 @@
     .release-platforms { display: flex; flex-wrap: wrap; gap: 8px; align-self: start; }
     .plat { font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.25em; text-transform: uppercase; text-decoration: none; color: var(--white-faint); padding: 6px 14px; border: 1px solid var(--glass-border); transition: color 0.3s, border-color 0.3s; }
     .plat:hover { color: var(--gold); border-color: var(--gold-line); }
-    .fragments { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1.6fr 1fr; gap: 2px; height: min(560px,80vw); }
-    .fragment { background: rgba(255,255,255,0.015); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; transition: border-color 0.4s; cursor: pointer; }
-    .fragment:first-child { grid-row: span 2; }
-    .fragment:hover { border-color: var(--gold-line); }
-    .fragment img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s ease, filter 1.2s ease; filter: brightness(0.75); }
-    .fragment:hover img { transform: scale(1.03); filter: brightness(0.92); }
-    .fragment-label { font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.3em; color: var(--white-faint); text-transform: uppercase; text-align: center; }
-    .fragment-play { position: absolute; bottom: 12px; right: 12px; width: 24px; height: 24px; border: 1px solid var(--gold-line); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
-    .fragment:hover .fragment-play { opacity: 1; }
-    .fragment-play::after { content: ''; width: 0; height: 0; border: 4px solid transparent; border-left: 7px solid var(--gold); margin-left: 2px; }
+    .cf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .cf-card { position: relative; aspect-ratio: 16/9; background: #0a080a; border: 1px solid var(--glass-border); overflow: hidden; cursor: pointer; transition: border-color 0.4s; }
+    .cf-card:hover { border-color: var(--gold-line); }
+    .cf-card video { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.7); }
+    .cf-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; transition: opacity 0.3s; }
+    .cf-card.playing .cf-overlay { opacity: 0; }
+    .cf-play { width: 40px; height: 40px; border: 1px solid rgba(201,165,90,0.5); border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(3,3,5,0.5); transition: background 0.3s, border-color 0.3s; }
+    .cf-card:hover .cf-play { background: rgba(201,165,90,0.1); border-color: rgba(201,165,90,0.8); }
+    .cf-play::after { content: ''; width: 0; height: 0; border: 5px solid transparent; border-left: 10px solid var(--gold); margin-left: 3px; }
+    .cf-label { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.35em; color: rgba(232,228,220,0.5); text-transform: uppercase; }
+    .cf-sub { font-family: var(--font-body); font-size: clamp(13px,2vw,16px); font-weight: 300; letter-spacing: 0.08em; color: var(--white-dim); margin-bottom: 40px; }
+    @media (max-width: 640px) { .cf-grid { grid-template-columns: 1fr; } }
     #contact { text-align: center; }
     .contact-body { font-family: var(--font-body); font-size: clamp(14px,2.2vw,18px); font-weight: 300; letter-spacing: 0.08em; color: var(--white-dim); line-height: 1.9; margin-bottom: 44px; }
     .contact-link { font-family: var(--font-display); font-size: 12px; font-weight: 300; letter-spacing: 0.4em; color: var(--gold); text-decoration: none; text-transform: uppercase; border-bottom: 1px solid var(--gold-line); padding-bottom: 4px; transition: opacity 0.3s; }
@@ -239,22 +241,29 @@
   </div>
   <div class="section reveal" id="visuals">
     <p class="section-tag">Chorus Fragments</p>
-    <div class="fragments">
-
-      <div class="fragment" data-label="Teaser Video">
-        <img src="04_STAGE/stage_01_main_9x16.png" alt="Glass Shrine" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.75)">
-        <div class="fragment-play"></div>
+    <p class="cf-sub">Selected visual fragments from each release.</p>
+    <div class="cf-grid">
+      <div class="cf-card" onclick="playFragment(this)">
+        <video src="05_VIDEO/fragments/web/glass_shrine.mp4" preload="none" loop playsinline></video>
+        <div class="cf-overlay">
+          <div class="cf-play"></div>
+          <span class="cf-label">Glass Shrine</span>
+        </div>
       </div>
-
-      <div class="fragment" data-label="Mask Still">
-        <img src="01_CHARACTER/oracle/oracle_08_front_dark_true_9x16_v1.png" alt="Mask Still" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.75)">
+      <div class="cf-card" onclick="playFragment(this)">
+        <video src="05_VIDEO/fragments/web/yoru_yoru.mp4" preload="none" loop playsinline></video>
+        <div class="cf-overlay">
+          <div class="cf-play"></div>
+          <span class="cf-label">Yoru Yoru</span>
+        </div>
       </div>
-
-
-      <div class="fragment" data-label="Behind the Shrine">
-        <img src="05_VIDEO/tapNow/KF05_oracle_back_halo_wide_16x9_v2.png" alt="Behind the Shrine" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.75)">
+      <div class="cf-card" onclick="playFragment(this)">
+        <video src="05_VIDEO/fragments/web/mawaru.mp4" preload="none" loop playsinline></video>
+        <div class="cf-overlay">
+          <div class="cf-play"></div>
+          <span class="cf-label">Mawaru</span>
+        </div>
       </div>
-
     </div>
   </div>
   <div class="section reveal" id="contact">
@@ -269,6 +278,21 @@
   <script>
     const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }), { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    function playFragment(card) {
+      const video = card.querySelector('video');
+      if (card.classList.contains('playing')) {
+        video.pause();
+        card.classList.remove('playing');
+      } else {
+        document.querySelectorAll('.cf-card.playing').forEach(c => {
+          c.querySelector('video').pause();
+          c.classList.remove('playing');
+        });
+        video.play();
+        card.classList.add('playing');
+      }
+    }
   </script>
 </body>
 </html>
