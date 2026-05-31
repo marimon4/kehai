@@ -71,8 +71,8 @@
       pointer-events: none; z-index: 1;
     }
     .hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; padding-top: min(56vh, 520px); }
-    .hero-title { font-family: var(--font-display); font-size: clamp(52px,15vw,120px); font-weight: 400; letter-spacing: 0.55em; text-indent: 0.55em; color: var(--ink); line-height: 1; animation: rise 1.6s ease both; }
-    .hero-tagline { font-family: var(--font-display); font-style: italic; font-size: clamp(12px,2vw,15px); letter-spacing: 0.08em; color: var(--ink-dim); margin-top: 20px; line-height: 2; animation: rise 1.6s 0.2s ease both; }
+    .hero-title { font-family: var(--font-display); font-size: clamp(52px,15vw,120px); font-weight: 200; letter-spacing: 0.5em; text-indent: 0.5em; color: var(--ink); line-height: 1; animation: rise 1.6s ease both; }
+    .hero-tagline { font-family: var(--font-body); font-size: clamp(13px,2.2vw,16px); font-weight: 300; letter-spacing: 0.22em; color: var(--ink-dim); margin-top: 22px; line-height: 2.2; animation: rise 1.6s 0.2s ease both; }
     @keyframes rise { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
     .scroll-cue { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px; animation: rise 2s 1.2s ease both; }
     .scroll-cue span { font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.4em; color: var(--ink-faint); }
@@ -160,7 +160,7 @@
 
     /* ── SIGNAL ── */
     #contact { text-align: left; }
-    .contact-body { font-family: var(--font-display); font-style: italic; font-size: clamp(15px,2.2vw,18px); color: var(--ink-dim); line-height: 2; margin-bottom: 40px; }
+    .contact-body { font-family: var(--font-body); font-size: clamp(15px,2.2vw,18px); font-weight: 300; letter-spacing: 0.08em; color: var(--ink-dim); line-height: 2; margin-bottom: 40px; }
     .contact-link { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.3em; color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 3px; transition: color 0.3s, border-color 0.3s; }
     .contact-link:hover { color: var(--ink); border-color: var(--ink-faint); }
 
