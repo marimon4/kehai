@@ -142,7 +142,7 @@
 
     /* ── FRAGMENTS ── */
     .cf-sub { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.3em; color: var(--ink-faint); margin-bottom: 32px; }
-    .cf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); }
+    .cf-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); }
     .cf-card { position: relative; aspect-ratio: 16/9; background: var(--black); overflow: hidden; cursor: pointer; }
     .cf-card video { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.65); }
     .cf-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; transition: opacity 0.3s; background: rgba(6,6,4,0.2); }
@@ -257,6 +257,20 @@
           <a href="#" class="plat">Apple</a>
         </div>
       </article>
+      <article class="record">
+        <div class="record-art">
+          <img src="08_JACKET/still_there_cover.jpg" alt="Still There" />
+        </div>
+        <div class="record-meta">
+          <p class="record-num">KEH-004</p>
+          <h2 class="record-title">STILL THERE</h2>
+          <p class="record-date">Single · 15 June 2026</p>
+        </div>
+        <div class="record-links">
+          <a href="#" class="plat">Spotify</a>
+          <a href="#" class="plat">Apple</a>
+        </div>
+      </article>
     </div>
   </div>
 
@@ -285,8 +299,16 @@
           <span class="cf-label">Mawaru</span>
         </div>
       </div>
+      <div class="cf-card" onclick="playFragment(this)">
+        <video src="05_VIDEO/fragments/web/still_there.mp4" preload="none" loop playsinline></video>
+        <div class="cf-overlay">
+          <div class="cf-play"></div>
+          <span class="cf-label">Still There</span>
+        </div>
+      </div>
     </div>
   </div>
+
 
   <div class="section reveal" style="border-top:none; padding-top:0;">
     <div style="max-width:560px; margin:0 auto; padding:40px 0 28px;">
