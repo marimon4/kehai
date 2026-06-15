@@ -142,7 +142,7 @@
 
     /* ── FRAGMENTS ── */
     .cf-sub { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.3em; color: var(--ink-faint); margin-bottom: 32px; }
-    .cf-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--rule); }
+    .cf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); }
     .cf-card { position: relative; aspect-ratio: 16/9; background: var(--black); overflow: hidden; cursor: pointer; }
     .cf-card video { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.65); }
     .cf-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; transition: opacity 0.3s; background: rgba(6,6,4,0.2); }
@@ -293,35 +293,35 @@
     <p class="cf-sub">Selected visual fragments from each release.</p>
     <div class="cf-grid">
       <div class="cf-card" onclick="playFragment(this)">
-        <video src="05_VIDEO/fragments/web/glass_shrine.mp4" poster="08_JACKET/COVER FIX.png" preload="none" loop playsinline></video>
+        <video src="05_VIDEO/fragments/web/glass_shrine.mp4" preload="metadata" loop playsinline></video>
         <div class="cf-overlay">
           <div class="cf-play"></div>
           <span class="cf-label">Glass Shrine</span>
         </div>
       </div>
       <div class="cf-card" onclick="playFragment(this)">
-        <video src="05_VIDEO/fragments/web/yoru_yoru.mp4" poster="08_JACKET/yoru_yoru_cover.jpg" preload="none" loop playsinline></video>
+        <video src="05_VIDEO/fragments/web/yoru_yoru.mp4" preload="metadata" loop playsinline></video>
         <div class="cf-overlay">
           <div class="cf-play"></div>
           <span class="cf-label">Yoru Yoru</span>
         </div>
       </div>
       <div class="cf-card" onclick="playFragment(this)">
-        <video src="05_VIDEO/fragments/web/mawaru.mp4" poster="08_JACKET/mawaru_cover.jpg" preload="none" loop playsinline></video>
+        <video src="05_VIDEO/fragments/web/mawaru.mp4" preload="metadata" loop playsinline></video>
         <div class="cf-overlay">
           <div class="cf-play"></div>
           <span class="cf-label">Mawaru</span>
         </div>
       </div>
       <div class="cf-card" onclick="playFragment(this)">
-        <video src="05_VIDEO/fragments/web/still_there.mp4" poster="08_JACKET/still_there_cover.jpg" preload="none" loop playsinline></video>
+        <video src="05_VIDEO/fragments/web/still_there.mp4" preload="metadata" loop playsinline></video>
         <div class="cf-overlay">
           <div class="cf-play"></div>
           <span class="cf-label">Still There</span>
         </div>
       </div>
       <div class="cf-card" onclick="playFragment(this)">
-        <video src="05_VIDEO/fragments/web/wasuremono.mp4" poster="08_JACKET/wasuremono_cover.jpg" preload="none" loop playsinline></video>
+        <video src="05_VIDEO/fragments/web/wasuremono.mp4" preload="metadata" loop playsinline></video>
         <div class="cf-overlay">
           <div class="cf-play"></div>
           <span class="cf-label">Wasuremono</span>
