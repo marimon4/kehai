@@ -143,6 +143,7 @@
     /* ── FRAGMENTS ── */
     .cf-sub { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.3em; color: var(--ink-faint); margin-bottom: 32px; }
     .cf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); }
+    .cf-card:last-child:nth-child(3n+1) { grid-column: 2; }
     .cf-card { position: relative; aspect-ratio: 16/9; background: var(--black); overflow: hidden; cursor: pointer; }
     .cf-card video { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.88); }
     .cf-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; transition: opacity 0.3s; background: rgba(6,6,4,0.2); }
