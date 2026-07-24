@@ -103,61 +103,45 @@
       font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.3em;
       color: var(--ink-faint); margin-top: 48px;
     }
+    .youtube-signal { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 18px 48px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .youtube-signal p { font-family: var(--font-mono); font-size: 8px; letter-spacing: .24em; color: var(--ink-dim); text-transform: uppercase; }
 
-    /* ── RECORDS ── */
-    .records-list { display: flex; flex-direction: column; gap: 0; }
-    .record {
-      display: grid;
-      grid-template-columns: 64px 1fr auto;
-      column-gap: 28px;
-      align-items: center;
-      padding: 24px 0;
-      border-bottom: 1px solid var(--rule);
-      position: relative;
-    }
-    .record:first-child { border-top: 1px solid var(--rule); }
-    .record-art {
-      width: 64px; height: 64px;
-      overflow: hidden; flex-shrink: 0;
-    }
-    .record-art img {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: brightness(0.75) contrast(1.05);
-      transition: filter 0.5s;
-    }
-    .record:hover .record-art img { filter: brightness(0.9) contrast(1.05); }
-    .record-meta { display: flex; flex-direction: column; gap: 4px; }
-    .record-num { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.4em; color: var(--ink-faint); }
-    .record-title { font-family: var(--font-display); font-size: clamp(14px,2.2vw,18px); color: var(--ink); letter-spacing: 0.05em; }
-    .record-date { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.3em; color: var(--ink-faint); }
-    .record-links { display: flex; gap: 8px; }
+    /* ── RELEASE ARCHIVE ── */
+    .release-archive { border-top: 1px solid var(--rule); }
+    .release-intro { padding: 88px 48px 58px; max-width: 1260px; margin: 0 auto; }
+    .release-intro p:last-child { max-width: 430px; font-size: 14px; color: var(--ink-dim); }
+    .release-layout { display: grid; grid-template-columns: minmax(190px, .52fr) minmax(0, 1.98fr); max-width: 1440px; margin: 0 auto; }
+    .archive-index { position: sticky; top: 0; height: 100vh; padding: 108px 32px 36px; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--rule); }
+    .archive-mark { font-family: var(--font-display); font-size: 11px; letter-spacing: .5em; color: var(--ink-faint); }
+    .archive-current { display: flex; flex-direction: column; gap: 11px; }
+    .archive-current span, .archive-list button { font-family: var(--font-mono); font-size: 7px; letter-spacing: .22em; text-transform: uppercase; }
+    .archive-current span { color: var(--ink-faint); }
+    .archive-current strong { font-family: var(--font-display); font-size: clamp(20px, 2.3vw, 32px); font-weight: 200; letter-spacing: .1em; color: var(--ink); line-height: 1.2; }
+    .archive-list { display: flex; flex-direction: column; gap: 10px; }
+    .archive-list button { appearance: none; border: 0; background: none; padding: 0; color: rgba(208,203,194,.58); text-align: left; cursor: pointer; transition: color .25s, transform .25s; }
+    .archive-list button:hover, .archive-list button[aria-current="true"] { color: var(--ink); transform: translateX(5px); }
+    .release-stages { min-width: 0; }
+    .release-stage { min-height: 100svh; position: relative; display: grid; place-items: center; padding: 72px clamp(20px, 5vw, 72px); overflow: hidden; border-bottom: 1px solid var(--rule); isolation: isolate; }
+    .release-visual { position: absolute; inset: 0; overflow: hidden; background: #090907; }
+    .release-visual::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,8,6,.5), transparent 62%), linear-gradient(0deg, rgba(8,8,6,.52), transparent 55%); pointer-events: none; }
+    .release-visual video { width: 100%; height: 100%; object-fit: cover; filter: brightness(.58) saturate(.72) contrast(1.08); transform: scale(1.025); transition: filter .8s ease, transform 1.2s ease; }
+    .release-stage.is-active .release-visual video { filter: brightness(.76) saturate(.9) contrast(1.04); transform: scale(1); }
+    .release-stage[data-release="koi"] .release-visual { background: #081113; }
+    .stage-copy { position: relative; z-index: 2; width: min(100%, 560px); align-self: end; justify-self: start; padding-bottom: clamp(24px, 4vw, 56px); }
+    .stage-number { font-family: var(--font-mono); font-size: 9px; letter-spacing: .4em; color: var(--ink-dim); }
+    .stage-title { margin: 13px 0 18px; font-family: var(--font-display); font-size: clamp(36px, 6vw, 78px); font-weight: 200; letter-spacing: .12em; line-height: .95; color: var(--ink); }
+    .stage-note { max-width: 320px; font-family: var(--font-mono); font-size: 8px; line-height: 2; letter-spacing: .25em; color: var(--ink-dim); text-transform: uppercase; }
+    .stage-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+    .sound-toggle { cursor: pointer; background: rgba(6,6,4,.25); }
+    .sound-toggle[aria-pressed="true"] { color: var(--ink); border-color: var(--ink-faint); }
     .plat {
       font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.2em;
       text-transform: uppercase; text-decoration: none;
-      color: var(--ink-faint); padding: 6px 12px;
+      color: rgba(208,203,194,.7); padding: 6px 12px;
       border: 1px solid var(--rule);
       transition: color 0.3s, border-color 0.3s;
     }
     .plat:hover { color: var(--ink); border-color: var(--ink-faint); }
-
-    /* ── FRAGMENTS ── */
-    .cf-sub { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.3em; color: var(--ink-faint); margin-bottom: 32px; }
-    .cf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--black); }
-    .cf-card:last-child:nth-child(3n+1) { grid-column: 2; }
-    .cf-card { position: relative; aspect-ratio: 16/9; background: var(--black); overflow: hidden; cursor: pointer; }
-    .cf-card video { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.88); }
-    .cf-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; transition: opacity 0.3s; background: rgba(6,6,4,0.2); }
-    .cf-card.playing .cf-overlay { opacity: 0; }
-    .cf-play {
-      width: 36px; height: 36px;
-      border: 1px solid rgba(208,203,194,0.3); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(6,6,4,0.6);
-      transition: border-color 0.3s;
-    }
-    .cf-card:hover .cf-play { border-color: rgba(208,203,194,0.7); }
-    .cf-play::after { content: ''; width: 0; height: 0; border: 4px solid transparent; border-left: 9px solid var(--ink); margin-left: 3px; }
-    .cf-label { font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.4em; color: var(--ink-faint); text-transform: uppercase; }
 
     /* ── SIGNAL ── */
     #contact { text-align: left; }
@@ -173,10 +157,23 @@
     @media (max-width: 640px) {
       nav { padding: 18px 20px; } .nav-links { display: none; }
       .section { padding: 64px 20px; }
-      .record { grid-template-columns: 48px 1fr; }
-      .record-links { display: none; }
-      .cf-grid { grid-template-columns: 1fr; background: none; gap: 2px; }
+      .release-intro { padding: 64px 20px 38px; }
+      .youtube-signal { padding: 16px 20px; }
+      .release-layout { display: block; }
+      .archive-index { position: relative; height: auto; padding: 34px 20px 30px; border-right: 0; border-bottom: 1px solid var(--rule); gap: 28px; }
+      .archive-current { display: none; }
+      .archive-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 11px 8px; }
+      .archive-list button { font-size: 7px; letter-spacing: .16em; }
+      .release-stage { min-height: 78svh; padding: 40px 20px; }
+      .stage-copy { padding-bottom: 24px; }
+      .stage-title { font-size: clamp(34px, 12vw, 54px); }
+      .release-stage[data-release="koi"] .release-visual::before { display: none; }
       footer { flex-direction: column; gap: 10px; text-align: center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+      .release-visual video { display: none; }
+      .release-visual { background-position: center; background-size: cover; }
     }
   </style>
 </head>
@@ -212,187 +209,36 @@
     <p class="section-label">Statement</p>
     <p class="about-text">KEHAI is a music and visual project from Japan, blending ritual futurism, electronic sound, and fragments of everyday otherworldliness.<br><br>A masked oracle. Sound you can't see. Presence you can't ignore.</p>
   </div>
+  <div class="youtube-signal">
+    <p>New signal / KEHAI is now on YouTube</p>
+    <a href="https://www.youtube.com/@KEHAI_world" class="plat" target="_blank" rel="noopener">Watch YouTube ↗</a>
+  </div>
 
-  <div class="section reveal" id="releases">
-    <p class="section-label">Records</p>
-    <div class="records-list">
-      <article class="record">
-        <div class="record-art">
-          <img src="08_JACKET/COVER FIX.png" alt="Glass Shrine" />
-        </div>
-        <div class="record-meta">
-          <p class="record-num">KEH-001</p>
-          <h2 class="record-title">GLASS SHRINE</h2>
-          <p class="record-date">Single · 11 May 2026</p>
-        </div>
-        <div class="record-links">
-          <a href="https://open.spotify.com/track/1ifmviUjgTsLfmIrpRdLat" class="plat" target="_blank" rel="noopener">Spotify</a>
-          <a href="https://music.apple.com/jp/song/glass-shrine/6767237457" class="plat" target="_blank" rel="noopener">Apple</a>
-        </div>
-      </article>
-      <article class="record">
-        <div class="record-art">
-          <img src="08_JACKET/yoru_yoru_cover.jpg" alt="Yoru Yoru" />
-        </div>
-        <div class="record-meta">
-          <p class="record-num">KEH-002</p>
-          <h2 class="record-title">YORU YORU</h2>
-          <p class="record-date">Single · 08 June 2026</p>
-        </div>
-        <div class="record-links">
-          <a href="https://open.spotify.com/intl-ja/artist/0TyZ5uhrv3XKSyU7nTJkRn" class="plat" target="_blank" rel="noopener">Spotify</a>
-          <a href="https://music.apple.com/jp/artist/kehai/1896299362" class="plat" target="_blank" rel="noopener">Apple</a>
-        </div>
-      </article>
-      <article class="record">
-        <div class="record-art">
-          <img src="08_JACKET/mawaru_cover.jpg" alt="Mawaru" />
-        </div>
-        <div class="record-meta">
-          <p class="record-num">KEH-003</p>
-          <h2 class="record-title">MAWARU</h2>
-          <p class="record-date">Single · 08 June 2026</p>
-        </div>
-        <div class="record-links">
-          <a href="https://open.spotify.com/intl-ja/artist/0TyZ5uhrv3XKSyU7nTJkRn" class="plat" target="_blank" rel="noopener">Spotify</a>
-          <a href="https://music.apple.com/jp/artist/kehai/1896299362" class="plat" target="_blank" rel="noopener">Apple</a>
-        </div>
-      </article>
-      <article class="record">
-        <div class="record-art">
-          <img src="08_JACKET/still_there_cover.jpg" alt="Still There" />
-        </div>
-        <div class="record-meta">
-          <p class="record-num">KEH-004</p>
-          <h2 class="record-title">STILL THERE</h2>
-          <p class="record-date">Single · 15 June 2026</p>
-        </div>
-        <div class="record-links">
-          <a href="https://open.spotify.com/intl-ja/artist/0TyZ5uhrv3XKSyU7nTJkRn" class="plat" target="_blank" rel="noopener">Spotify</a>
-          <a href="https://music.apple.com/jp/artist/kehai/1896299362" class="plat" target="_blank" rel="noopener">Apple</a>
-        </div>
-      </article>
-      <article class="record">
-        <div class="record-art">
-          <img src="08_JACKET/wasuremono_cover.jpg" alt="Wasuremono" />
-        </div>
-        <div class="record-meta">
-          <p class="record-num">KEH-005</p>
-          <h2 class="record-title">WASUREMONO</h2>
-          <p class="record-date">Single · 22 June 2026</p>
-        </div>
-        <div class="record-links">
-          <a href="https://open.spotify.com/intl-ja/artist/0TyZ5uhrv3XKSyU7nTJkRn" class="plat" target="_blank" rel="noopener">Spotify</a>
-          <a href="https://music.apple.com/jp/artist/kehai/1896299362" class="plat" target="_blank" rel="noopener">Apple</a>
-        </div>
-      </article>
-      <article class="record">
-        <div class="record-art">
-          <img src="08_JACKET/narabu_cover.jpg" alt="Narabu" />
-        </div>
-        <div class="record-meta">
-          <p class="record-num">KEH-006</p>
-          <h2 class="record-title">NARABU</h2>
-          <p class="record-date">Single · 06 July 2026</p>
-        </div>
-        <div class="record-links">
-          <a href="https://open.spotify.com/intl-ja/artist/0TyZ5uhrv3XKSyU7nTJkRn" class="plat" target="_blank" rel="noopener">Spotify</a>
-          <a href="https://music.apple.com/jp/artist/kehai/1896299362" class="plat" target="_blank" rel="noopener">Apple</a>
-        </div>
-      </article>
-      <article class="record">
-        <div class="record-art">
-          <img src="08_JACKET/shadow_cover.jpg" alt="Shadow" />
-        </div>
-        <div class="record-meta">
-          <p class="record-num">KEH-007</p>
-          <h2 class="record-title">SHADOW</h2>
-          <p class="record-date">Single · 17 July 2026</p>
-        </div>
-        <div class="record-links">
-          <a href="https://open.spotify.com/intl-ja/artist/0TyZ5uhrv3XKSyU7nTJkRn" class="plat" target="_blank" rel="noopener">Spotify</a>
-          <a href="https://music.apple.com/jp/artist/kehai/1896299362" class="plat" target="_blank" rel="noopener">Apple</a>
-        </div>
-      </article>
-      <article class="record">
-        <div class="record-art">
-          <img src="08_JACKET/koi_cover.jpg" alt="Koi" />
-        </div>
-        <div class="record-meta">
-          <p class="record-num">KEH-008</p>
-          <h2 class="record-title">KOI</h2>
-          <p class="record-date">Single · 27 July 2026</p>
-        </div>
-        <div class="record-links">
-          <a href="https://open.spotify.com/intl-ja/artist/0TyZ5uhrv3XKSyU7nTJkRn" class="plat" target="_blank" rel="noopener">Spotify</a>
-          <a href="https://music.apple.com/jp/artist/kehai/1896299362" class="plat" target="_blank" rel="noopener">Apple</a>
-        </div>
-      </article>
+  <section class="release-archive" id="releases">
+    <div class="release-intro reveal">
+      <p class="section-label">Records / Fragments</p>
+      <p>Each release leaves a different trace. Scroll through the field.</p>
     </div>
-  </div>
-
-  <div class="section reveal" id="visuals">
-    <p class="section-label">Fragments</p>
-    <p class="cf-sub">Selected visual fragments from each release.</p>
-  </div>
-  <div class="cf-grid">
-      <div class="cf-card" onclick="playFragment(this)">
-        <video src="05_VIDEO/fragments/web/glass_shrine.mp4" poster="08_JACKET/glass_shrine_thumb.jpg" preload="none" loop playsinline></video>
-        <div class="cf-overlay">
-          <div class="cf-play"></div>
-          <span class="cf-label">Glass Shrine</span>
+    <div class="release-layout">
+      <aside class="archive-index" aria-label="Release index">
+        <span class="archive-mark">KEHAI</span>
+        <div class="archive-current" aria-live="polite"><span id="current-number">KEH-001</span><strong id="current-title">GLASS SHRINE</strong></div>
+        <div class="archive-list">
+          <button type="button" data-target="glass-shrine" aria-current="true">001 / Glass Shrine</button><button type="button" data-target="yoru-yoru">002 / Yoru Yoru</button><button type="button" data-target="mawaru">003 / Mawaru</button><button type="button" data-target="still-there">004 / Still There</button><button type="button" data-target="wasuremono">005 / Wasuremono</button><button type="button" data-target="narabu">006 / Narabu</button><button type="button" data-target="shadow">007 / Shadow</button><button type="button" data-target="koi">008 / Koi</button>
         </div>
+      </aside>
+      <div class="release-stages" id="visuals">
+        <article class="release-stage" id="glass-shrine" data-release="glass-shrine" data-number="KEH-001" data-title="GLASS SHRINE"><div class="release-visual"><video muted loop playsinline preload="none" poster="08_JACKET/glass_shrine_thumb.jpg"><source src="05_VIDEO/fragments/web/glass_shrine.mp4" type="video/mp4"></video></div><div class="stage-copy"><p class="stage-number">KEH-001 / SINGLE / 11 MAY 2026</p><h2 class="stage-title">GLASS SHRINE</h2><p class="stage-note">A quiet structure holding light after it breaks.</p><div class="stage-links"><a href="https://open.spotify.com/track/1ifmviUjgTsLfmIrpRdLat" class="plat" target="_blank" rel="noopener">Spotify</a><a href="https://music.apple.com/jp/song/glass-shrine/6767237457" class="plat" target="_blank" rel="noopener">Apple</a></div></div></article>
+        <article class="release-stage" id="yoru-yoru" data-release="yoru-yoru" data-number="KEH-002" data-title="YORU YORU"><div class="release-visual"><video muted loop playsinline preload="none" poster="08_JACKET/yoru_yoru_cover.jpg"><source src="05_VIDEO/fragments/web/yoru_yoru.mp4" type="video/mp4"></video></div><div class="stage-copy"><p class="stage-number">KEH-002 / SINGLE / 08 JUNE 2026</p><h2 class="stage-title">YORU YORU</h2><p class="stage-note">Night air, held close to the surface.</p><div class="stage-links"><a href="https://open.spotify.com/intl-ja/artist/0TyZ5uhrv3XKSyU7nTJkRn" class="plat" target="_blank" rel="noopener">Spotify</a><a href="https://music.apple.com/jp/artist/kehai/1896299362" class="plat" target="_blank" rel="noopener">Apple</a></div></div></article>
+        <article class="release-stage" id="mawaru" data-release="mawaru" data-number="KEH-003" data-title="MAWARU"><div class="release-visual"><video muted loop playsinline preload="none" poster="08_JACKET/mawaru_cover.jpg"><source src="05_VIDEO/fragments/web/mawaru.mp4" type="video/mp4"></video></div><div class="stage-copy"><p class="stage-number">KEH-003 / SINGLE / 08 JUNE 2026</p><h2 class="stage-title">MAWARU</h2><p class="stage-note">What returns is never exactly the same.</p><div class="stage-links"><a href="https://open.spotify.com/intl-ja/artist/0TyZ5uhrv3XKSyU7nTJkRn" class="plat" target="_blank" rel="noopener">Spotify</a><a href="https://music.apple.com/jp/artist/kehai/1896299362" class="plat" target="_blank" rel="noopener">Apple</a></div></div></article>
+        <article class="release-stage" id="still-there" data-release="still-there" data-number="KEH-004" data-title="STILL THERE"><div class="release-visual"><video muted loop playsinline preload="none" poster="08_JACKET/still_there_cover.jpg"><source src="05_VIDEO/fragments/web/still_there.mp4" type="video/mp4"></video></div><div class="stage-copy"><p class="stage-number">KEH-004 / SINGLE / 15 JUNE 2026</p><h2 class="stage-title">STILL THERE</h2><p class="stage-note">The room is empty. The presence remains.</p><div class="stage-links"><a href="https://open.spotify.com/intl-ja/artist/0TyZ5uhrv3XKSyU7nTJkRn" class="plat" target="_blank" rel="noopener">Spotify</a><a href="https://music.apple.com/jp/artist/kehai/1896299362" class="plat" target="_blank" rel="noopener">Apple</a></div></div></article>
+        <article class="release-stage" id="wasuremono" data-release="wasuremono" data-number="KEH-005" data-title="WASUREMONO"><div class="release-visual"><video muted loop playsinline preload="none" poster="08_JACKET/wasuremono_cover.jpg"><source src="05_VIDEO/fragments/web/wasuremono.mp4" type="video/mp4"></video></div><div class="stage-copy"><p class="stage-number">KEH-005 / SINGLE / 22 JUNE 2026</p><h2 class="stage-title">WASUREMONO</h2><p class="stage-note">A trace left behind after the person leaves.</p><div class="stage-links"><a href="https://open.spotify.com/intl-ja/artist/0TyZ5uhrv3XKSyU7nTJkRn" class="plat" target="_blank" rel="noopener">Spotify</a><a href="https://music.apple.com/jp/artist/kehai/1896299362" class="plat" target="_blank" rel="noopener">Apple</a></div></div></article>
+        <article class="release-stage" id="narabu" data-release="narabu" data-number="KEH-006" data-title="NARABU"><div class="release-visual"><video muted loop playsinline preload="none" poster="08_JACKET/narabu_cover.jpg"><source src="05_VIDEO/fragments/web/narabu.mp4" type="video/mp4"></video></div><div class="stage-copy"><p class="stage-number">KEH-006 / SINGLE / 06 JULY 2026</p><h2 class="stage-title">NARABU</h2><p class="stage-note">Bodies arranged by an unseen instruction.</p><div class="stage-links"><a href="https://open.spotify.com/intl-ja/artist/0TyZ5uhrv3XKSyU7nTJkRn" class="plat" target="_blank" rel="noopener">Spotify</a><a href="https://music.apple.com/jp/artist/kehai/1896299362" class="plat" target="_blank" rel="noopener">Apple</a></div></div></article>
+        <article class="release-stage" id="shadow" data-release="shadow" data-number="KEH-007" data-title="SHADOW"><div class="release-visual"><video muted loop playsinline preload="none" poster="08_JACKET/shadow_cover.jpg"><source src="05_VIDEO/fragments/web/shadow.mp4" type="video/mp4"></video></div><div class="stage-copy"><p class="stage-number">KEH-007 / SINGLE / 17 JULY 2026</p><h2 class="stage-title">SHADOW</h2><p class="stage-note">It moves first. You follow later.</p><div class="stage-links"><a href="https://open.spotify.com/intl-ja/artist/0TyZ5uhrv3XKSyU7nTJkRn" class="plat" target="_blank" rel="noopener">Spotify</a><a href="https://music.apple.com/jp/artist/kehai/1896299362" class="plat" target="_blank" rel="noopener">Apple</a></div></div></article>
+        <article class="release-stage" id="koi" data-release="koi" data-number="KEH-008" data-title="KOI"><div class="release-visual"><video muted loop playsinline preload="none" poster="08_JACKET/koi_cover.jpg"><source src="05_VIDEO/fragments/web/koi-water.mp4" type="video/mp4"></video></div><div class="stage-copy"><p class="stage-number">KEH-008 / SINGLE / 27 JULY 2026</p><h2 class="stage-title">KOI</h2><p class="stage-note">A reflection breaks, then returns as water.</p><div class="stage-links"><a href="https://open.spotify.com/intl-ja/artist/0TyZ5uhrv3XKSyU7nTJkRn" class="plat" target="_blank" rel="noopener">Spotify</a><a href="https://music.apple.com/jp/artist/kehai/1896299362" class="plat" target="_blank" rel="noopener">Apple</a></div></div></article>
       </div>
-      <div class="cf-card" onclick="playFragment(this)">
-        <video src="05_VIDEO/fragments/web/yoru_yoru.mp4" preload="metadata" loop playsinline></video>
-        <div class="cf-overlay">
-          <div class="cf-play"></div>
-          <span class="cf-label">Yoru Yoru</span>
-        </div>
-      </div>
-      <div class="cf-card" onclick="playFragment(this)">
-        <video src="05_VIDEO/fragments/web/mawaru.mp4" preload="metadata" loop playsinline></video>
-        <div class="cf-overlay">
-          <div class="cf-play"></div>
-          <span class="cf-label">Mawaru</span>
-        </div>
-      </div>
-      <div class="cf-card" onclick="playFragment(this)">
-        <video src="05_VIDEO/fragments/web/still_there.mp4" preload="metadata" loop playsinline></video>
-        <div class="cf-overlay">
-          <div class="cf-play"></div>
-          <span class="cf-label">Still There</span>
-        </div>
-      </div>
-      <div class="cf-card" onclick="playFragment(this)">
-        <video src="05_VIDEO/fragments/web/wasuremono.mp4" preload="metadata" loop playsinline></video>
-        <div class="cf-overlay">
-          <div class="cf-play"></div>
-          <span class="cf-label">Wasuremono</span>
-        </div>
-      </div>
-      <div class="cf-card" onclick="playFragment(this)">
-        <video src="05_VIDEO/fragments/web/narabu.mp4" preload="metadata" loop playsinline></video>
-        <div class="cf-overlay">
-          <div class="cf-play"></div>
-          <span class="cf-label">Narabu</span>
-        </div>
-      </div>
-      <div class="cf-card" onclick="playFragment(this)">
-        <video src="05_VIDEO/fragments/web/shadow.mp4" preload="metadata" loop playsinline></video>
-        <div class="cf-overlay">
-          <div class="cf-play"></div>
-          <span class="cf-label">Shadow</span>
-        </div>
-      </div>
-      <div class="cf-card" onclick="playFragment(this)">
-        <video src="05_VIDEO/fragments/web/koi.mp4" preload="metadata" loop playsinline></video>
-        <div class="cf-overlay">
-          <div class="cf-play"></div>
-          <span class="cf-label">Koi</span>
-        </div>
-      </div>
-  </div>
+    </div>
+  </section>
 
 
   <div class="section reveal" style="border-top:none; padding-top:0;">
@@ -421,20 +267,62 @@
     }), { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-    function playFragment(card) {
-      const video = card.querySelector('video');
-      if (card.classList.contains('playing')) {
-        video.pause();
-        card.classList.remove('playing');
-      } else {
-        document.querySelectorAll('.cf-card.playing').forEach(c => {
-          c.querySelector('video').pause();
-          c.classList.remove('playing');
-        });
-        video.play();
-        card.classList.add('playing');
-      }
+    const stages = [...document.querySelectorAll('.release-stage')];
+    const currentNumber = document.querySelector('#current-number');
+    const currentTitle = document.querySelector('#current-title');
+    const releaseButtons = [...document.querySelectorAll('[data-target]')];
+    const motionReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const audioPreviews = {
+      'glass-shrine': '06_AUDIO/web/glass-shrine-preview.m4a', 'yoru-yoru': '06_AUDIO/web/yoru-yoru-preview.m4a',
+      mawaru: '06_AUDIO/web/mawaru-preview.m4a', 'still-there': '06_AUDIO/web/still-there-preview.m4a',
+      wasuremono: '06_AUDIO/web/wasuremono-preview.m4a', narabu: '06_AUDIO/web/narabu-preview.m4a',
+      shadow: '06_AUDIO/web/shadow-preview.m4a', koi: '06_AUDIO/web/koi-preview.m4a'
+    };
+    const previewAudio = new Audio();
+    let playingStageId = '';
+    stages.forEach(stage => {
+      const button = document.createElement('button');
+      button.type = 'button'; button.className = 'plat sound-toggle'; button.textContent = '▶ Listen'; button.setAttribute('aria-pressed', 'false');
+      button.addEventListener('click', () => {
+        const video = stage.querySelector('video');
+        if (playingStageId === stage.id) { previewAudio.pause(); playingStageId = ''; }
+        else {
+          previewAudio.pause();
+          if (video) { video.currentTime = 0; video.play().catch(() => {}); }
+          previewAudio.src = audioPreviews[stage.id]; previewAudio.currentTime = 0; previewAudio.play().catch(() => {}); playingStageId = stage.id;
+        }
+        document.querySelectorAll('.sound-toggle').forEach(item => { const active = item === button && playingStageId === stage.id; item.setAttribute('aria-pressed', String(active)); item.textContent = active ? '■ Stop' : '▶ Listen'; });
+      });
+      stage.querySelector('.stage-links')?.prepend(button);
+    });
+    previewAudio.addEventListener('ended', () => { playingStageId = ''; document.querySelectorAll('.sound-toggle').forEach(item => { item.setAttribute('aria-pressed', 'false'); item.textContent = '▶ Listen'; }); });
+
+    function setActiveStage(stage) {
+      stages.forEach(item => item.classList.toggle('is-active', item === stage));
+      if (playingStageId && playingStageId !== stage.id) { previewAudio.pause(); playingStageId = ''; document.querySelectorAll('.sound-toggle').forEach(item => { item.setAttribute('aria-pressed', 'false'); item.textContent = '▶ Listen'; }); }
+      releaseButtons.forEach(button => button.setAttribute('aria-current', String(button.dataset.target === stage.id)));
+      if (currentNumber) currentNumber.textContent = stage.dataset.number;
+      if (currentTitle) currentTitle.textContent = stage.dataset.title;
     }
+
+    const stageObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+      const video = entry.target.querySelector('video');
+      if (entry.isIntersecting) {
+        setActiveStage(entry.target);
+        if (!motionReduced && video) video.play().catch(() => {});
+      } else if (video) {
+        video.pause();
+      }
+    }), { threshold: 0.58 });
+    stages.forEach(stage => stageObserver.observe(stage));
+
+    releaseButtons.forEach(button => button.addEventListener('click', () => {
+      document.getElementById(button.dataset.target)?.scrollIntoView({ behavior: 'auto', block: 'center' });
+    }));
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stages.forEach(stage => stage.querySelector('video')?.pause());
+    });
   </script>
 </body>
 </html>
